@@ -6,7 +6,7 @@ from typing import Tuple
 def is_prob_prime(n: int, witnesses: List = list([2, 3, 5])) -> bool:
     """Checks if a number is probably prime. This function will run the
     miller-rabin prime test on with a given list of witnesses. If all
-    witnesses aggree that a number is prime, then True is returned. Otherwise,
+    witnesses agree that a number is prime, then True is returned. Otherwise,
     False is returned since the number is not prime.
 
     Args:
