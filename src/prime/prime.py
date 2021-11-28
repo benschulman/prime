@@ -1,6 +1,31 @@
+from functools import lru_cache
+from typing import List
 from typing import Tuple
 
 
+def is_prob_prime(n: int, witnesses: List = list([2, 3, 5])) -> bool:
+    """Checks if a number is probably prime. This function will run the
+    miller-rabin prime test on with a given list of witnesses. If all
+    witnesses aggree that a number is prime, then True is returned. Otherwise,
+    False is returned since the number is not prime.
+
+    Args:
+        n (int): The number to check primality
+        witnesses (List, optional): A list of witnesses. Defaults to
+        [2,3,5].
+
+    Returns:
+        bool: True if miller-rabin returns True for all given witnesses. False
+        if at least one witness returns False
+    """
+    for wit in witnesses:
+        if not miller_rabin_prime(n, wit):
+            return False
+
+    return True
+
+
+@lru_cache(maxsize=256)
 def miller_rabin_prime(n: int, a: int) -> bool:
     """Given a number (n) and a witness (a) this function performs the miller-rabin
     primality test. If the number is found not to be prime, False is returned.
@@ -73,9 +98,3 @@ def s_d_decompose(n: int) -> Tuple[int, int]:
     d = n
 
     return (s, d)
-
-
-if __name__ == "__main__":
-    prime = miller_rabin_prime(91, 10)
-
-    print(prime)
